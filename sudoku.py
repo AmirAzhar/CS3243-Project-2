@@ -39,6 +39,7 @@ class csp(object):
         d = 0
         puzzle1D = self.convertTo1D(puzzle)
         for var in self.variables:
+            self.domains[var] = set()
             # If original number is 0, set the domain of the variable to contain 1-9
             if puzzle1D[d] == 0:
                 for num in range(1, 10):
@@ -52,6 +53,7 @@ class csp(object):
     def initAdjencyList(self, puzzle):
         #Remember that var is a pair of coordinates (x,y)
         for var in self.variables:
+            self.adjencyList[var] = set()
             for i in range(len(puzzle)):
                 #Add neighbours based on row
                 if (var[0], i) != var:
