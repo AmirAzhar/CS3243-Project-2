@@ -75,7 +75,16 @@ class Sudoku(object):
         self.puzzle = puzzle 
         self.ans = copy.deepcopy(puzzle)
     
-    #Using AC3 algorithm for the backtracking inference
+    #Backtrack algorithm to solve given CSP
+    #def backtrack(self, assignment, csp):
+
+    #Ordering variables based on Most Constraining Variable heuristic
+    #def selectUnassignedVariable(self, csp):
+
+    #Ordering domain values by using Least Constraining Value heuristic
+    #def orderDomainValues(self, variable, assignment, csp):
+    
+    #Using AC3 algorithm as inference
     def AC3(self, csp):
         arcQueue = self.getArcs(csp)
 
