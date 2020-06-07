@@ -3,6 +3,7 @@
 
 import sys
 import copy
+from queue import * #Use 'Queue' for sunfire and 'queue' for Python 3.7
 
 # Running script: given code can be run with the command:
 # python file.py, ./path/to/init_state.txt ./output/output.txt
@@ -71,9 +72,41 @@ class csp(object):
 
 class Sudoku(object):
     def __init__(self, puzzle):
-        self.puzzle = puzzle # self.puzzle is a list of lists
-        self.ans = copy.deepcopy(puzzle) # self.ans is a list of lists
+        self.puzzle = puzzle 
+        self.ans = copy.deepcopy(puzzle)
+    
+    #Using AC3 algorithm for the backtracking inference
+    def AC3(self, csp):
+        arcQueue = self.getArcs(csp)
 
+        while not arcQueue.empty():
+            xi, xj = arcQueue.get()
+            if self.revise(csp, xi, xj):
+                if len(csp.domain[xi]) == 0:
+                    return False
+                for xk in csp.adjencyList[xi]:
+                    arcQueue.put((xk,xi))
+        return True
+
+    #Revise the domain of xi (used in AC3)
+    def revise(self, csp, xi, xj):
+        isRevised = False
+        for value in csp.domains:
+            if not value in csp.domains[xj]:
+                csp.domains[xj].remove[value]
+                isRevised = True
+        return isRevised
+
+
+    #Get all the arcs in a csp based on the adjency list
+    def getArcs(self, csp):
+        arcQueue = Queue()
+        for x in csp.adjencyList:
+            for y in csp.adjencyList[x]:
+                arcQueue.put((x,y))
+        return arcQueue
+
+    #Solve the given puzzle as a CSP
     def solve(self):
         return self.ans
 
