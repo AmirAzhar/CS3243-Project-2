@@ -18,7 +18,6 @@ class Sudoku(object):
     def csp(self, state):
         var_domain = {}
         var_constraints = defaultdict(list)
-        var_unassigned = 0
 
         # Initialize var_domain
         for row in range(9):
