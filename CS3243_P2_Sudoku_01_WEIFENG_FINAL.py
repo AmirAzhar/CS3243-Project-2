@@ -66,8 +66,7 @@ class Sudoku(object):
             return state
 
         variable = self.select_unassigned_variable(unassigned_positions, domains)
-        row = variable[0]
-        col = variable[1]
+        (row,col) = variable
         removed = defaultdict(set)
 
         for value in self.order_domain_value(variable, domains):
