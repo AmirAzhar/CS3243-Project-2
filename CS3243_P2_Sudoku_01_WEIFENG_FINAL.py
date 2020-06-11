@@ -122,16 +122,16 @@ class Sudoku(object):
     def order_domain_value(self, variable, domains):
         # order the domain by Least Constraining Value 
         neighbours = self.constraints[variable]  
-        value_count_tuples = set()
+        neighboring_tuples = set()
 
         for value in domains[variable]:
             count = 0
             for neighbour in neighbours:
                 if value in domains[neighbour]:
                     count += 1
-            value_count_tuples.add((value, count))
+            neighboring_tuples.add((value, count))
 
-        sorted_by_count = sorted(value_count_tuples, key=lambda tup: tup[1], reverse=False)
+        sorted_by_count = sorted(neighboring_tuples, key=lambda tup: tup[1], reverse=False)
         result = [value[0] for value in sorted_by_count]
         return result
 
